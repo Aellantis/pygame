@@ -3,8 +3,8 @@ from random import randint, choice
 pygame.init()
 pygame.mixer.init()
 
-meow_sound = pygame.mixer.Sound("meow.mp3")
-bark_sound = pygame.mixer.Sound("bark.mp3")
+meow_sound = pygame.mixer.Sound("audio/meow.mp3")
+bark_sound = pygame.mixer.Sound("audio/bark.mp3")
 
 lives = 3
 
