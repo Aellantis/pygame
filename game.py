@@ -15,8 +15,8 @@ screen = pygame.display.set_mode([500, 500])
 lanes = [50, 150, 250, 350, 400]  
 
 # Load the background image
-background = pygame.image.load('images/background.jpg')  # Ensure you have a 'background.png' image file in your project directory
-background = pygame.transform.scale(background, (500, 500))  # Resize to fit the screen
+background = pygame.image.load('images/background.jpg') 
+background = pygame.transform.scale(background, (500, 500))
 
 
 # ----------------------------------------------
@@ -160,8 +160,6 @@ class Player(GameObject):
     self.pos_x = 2
     self.pos_y = 2
     self.reset()
-    
-    self.meow_sound = pygame.mixer.Sound("meow.mp3")
 
   def left(self):
     if self.pos_x > 0:
@@ -204,21 +202,20 @@ def display_lives(screen, lives):
     for i in range(lives):
         screen.blit(pygame.image.load('images/lives.png'), (480 - (i + 1) * 40, 10))  # Adjust the position if needed
 
-# Make a group
+# Making Groups
 all_sprites = pygame.sprite.Group()
-# make a fruits Group
 fruit_sprites = pygame.sprite.Group()
 
-# Make Fruit instances
+# Make 'Fruit' instances
 fish = Fish()
 milk = Milk()
 fruit_sprites.add(fish)
 fruit_sprites.add(milk)
 
-# make instance of Player
+# Instance of Player
 player = Player()
 
-# make bomb
+# Make bomb
 bomb = Bomb()
 
 # Add sprites to group
@@ -259,7 +256,7 @@ while running:
     entity.render(screen)
 
   
-  # displaying lives
+  # Displaying lives
   display_lives(screen, lives)
 
   # Check Colisions
