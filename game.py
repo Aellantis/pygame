@@ -7,6 +7,8 @@ from files.Milk import Milk
 from files.Player import Player
 from files.Sparkle import Sparkle
 from files.Yarn import Yarn
+from files.ScoreBoard import ScoreBoard
+from files.Points import PointsSprite
 
 pygame.init()
 pygame.mixer.init()
@@ -59,6 +61,10 @@ bomb = Bomb()
 all_sprites.add(player)
 all_sprites.add(bomb)
 
+# Score
+score = ScoreBoard(30, 30, 0)
+all_sprites.add(score)
+
 # Get the clock
 clock = pygame.time.Clock()
 
@@ -88,6 +94,11 @@ while running:
         player.up()
       elif event.key == pygame.K_DOWN:
         player.down()
+        
+# Check for the stun event (when the timer finishes)
+    if event.type == pygame.USEREVENT:
+        player.un_stun()  
+        pygame.time.set_timer(pygame.USEREVENT, 0)  
 
   # Clear screen and draw background
   screen.blit(background, (0, 0))  
@@ -99,7 +110,6 @@ while running:
     if entity != player: 
       pass
 
-  
   # Displaying lives
   display_lives(screen, lives)
 
@@ -108,19 +118,38 @@ while running:
   if fruit:
     make_pop(fruit.x, fruit.y)
     meow_sound.play()  
+    points = PointsSprite(fruit.x, fruit.y, 100)
+    score.update(50)
+    all_sprites.add(points)
     fruit.reset()
 
-  fruit = pygame.sprite.spritecollideany(player, yarn_sprite)
-  if fruit: 
-    make_pop(fruit.x, fruit.y)
+  yarn = pygame.sprite.spritecollideany(player, yarn_sprite)
+  if yarn: 
+    make_pop(yarn.x, yarn.y)
+    points = PointsSprite(yarn.x, yarn.y, 100)
+    score.update(100)
+    all_sprites.add(points)
     sparkle_sound.play()
-    fruit.reset()
+    player.stun()
+    yarn.reset()
 
 # Fruit bomb collisions
   fruit = pygame.sprite.spritecollideany(bomb, fruit_sprites)
   if fruit:
     make_explosion(fruit.x, fruit.y)
     confused_dog_sound.play()
+    points = PointsSprite(fruit.x, fruit.y, 100)
+    score.update(-25)
+    all_sprites.add(points)
+    fruit.reset()
+
+  fruit = pygame.sprite.spritecollideany(bomb, yarn_sprite)
+  if fruit:
+    make_explosion(fruit.x, fruit.y)
+    confused_dog_sound.play()
+    points = PointsSprite(fruit.x, fruit.y, 100)
+    score.update(-75)
+    all_sprites.add(points)
     fruit.reset()
 
   # Check collision player and bomb
@@ -141,5 +170,5 @@ while running:
   # Update the window
   pygame.display.flip()
 
-  # tick the clock!
+  # Tick the clock!
   clock.tick(30)
