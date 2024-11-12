@@ -6,6 +6,7 @@ from files.Fish import Fish
 from files.Milk import Milk
 from files.Player import Player
 from files.Sparkle import Sparkle
+from files.Yarn import Yarn
 
 pygame.init()
 pygame.mixer.init()
@@ -13,6 +14,7 @@ pygame.mixer.init()
 meow_sound = pygame.mixer.Sound("audio/meow.mp3")
 bark_sound = pygame.mixer.Sound("audio/bark.mp3")
 confused_dog_sound = pygame.mixer.Sound("audio/confused_dog.mp3")
+sparkle_sound = pygame.mixer.Sound("audio/sparkle.mp3")
 
 lives = 3
 
@@ -31,12 +33,21 @@ def display_lives(screen, lives):
 all_sprites = pygame.sprite.Group()
 fruit_sprites = pygame.sprite.Group()
 explosion_sprites = pygame.sprite.Group()
+yarn_sprite = pygame.sprite.Group()
 
-# Make 'Fruit' instances
-fish = Fish()
-milk = Milk()
-fruit_sprites.add(fish)
-fruit_sprites.add(milk)
+# Make Fruit instances
+for n in range(1, 2):
+  fish = Fish()
+  milk = Milk()
+  yarn = Yarn()
+  fruit_sprites.add(fish)
+  fruit_sprites.add(milk)
+  yarn_sprite.add(yarn)
+  all_sprites.add(fish)
+  all_sprites.add(milk)
+  all_sprites.add(yarn)
+
+    
 
 # Instance of Player
 player = Player()
@@ -46,8 +57,6 @@ bomb = Bomb()
 
 # Add sprites to group
 all_sprites.add(player)
-all_sprites.add(fish)
-all_sprites.add(milk)
 all_sprites.add(bomb)
 
 # Get the clock
@@ -99,6 +108,12 @@ while running:
   if fruit:
     make_pop(fruit.x, fruit.y)
     meow_sound.play()  
+    fruit.reset()
+
+  fruit = pygame.sprite.spritecollideany(player, yarn_sprite)
+  if fruit: 
+    make_pop(fruit.x, fruit.y)
+    sparkle_sound.play()
     fruit.reset()
 
 # Fruit bomb collisions
