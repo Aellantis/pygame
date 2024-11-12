@@ -21,7 +21,7 @@ From the assignment instructions:
 - I was allowed to change the sprites and make the game my own, so I added sound effects and animated images.
 - I also would flip some images depending on the direction it was spawning from.
 - Implemented a stun for 2 seconds while the dog eats up your points :D
-- Implemented "lives" though cats have 8 lives, we are sacrificing 3 lol. 
+- Implemented "lives" though cats have 9 lives, we are sacrificing 3 lol. 
   
 ## Language Used
 - Python (hence pygame :D)
