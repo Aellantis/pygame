@@ -1,7 +1,7 @@
 import pygame
-from GameObject import GameObject
+from files.GameObject import GameObject
 from random import randint, choice
-from Lanes import lanes
+from files.Lanes import lanes
 
 class Bomb(GameObject):
   def __init__(self):

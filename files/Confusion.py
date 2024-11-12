@@ -1,5 +1,5 @@
 from typing import Sequence
-from Animation import Animation
+from files.Animation import Animation
 
 def get_explosion_frames():
   frames = []

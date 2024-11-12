@@ -1,7 +1,7 @@
 import pygame
 from random import randint, choice
-from GameObject import GameObject
-from Lanes import lanes
+from files.GameObject import GameObject
+from files.Lanes import lanes
 
 class Fish(GameObject):
   def __init__(self):

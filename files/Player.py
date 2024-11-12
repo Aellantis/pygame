@@ -1,5 +1,5 @@
-from Lanes import lanes
-from GameObject import GameObject
+from files.Lanes import lanes
+from files.GameObject import GameObject
 import pygame
 
 # Player

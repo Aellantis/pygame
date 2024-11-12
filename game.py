@@ -1,11 +1,11 @@
 import pygame
 from random import randint, choice
-from Animation import Animation
-from Confusion import Explosion
-from Bomb import Bomb
-from Fish import Fish
-from Milk import Milk
-from Player import Player
+from files.Animation import Animation
+from files.Confusion import Explosion
+from files.Bomb import Bomb
+from files.Fish import Fish
+from files.Milk import Milk
+from files.Player import Player
 
 pygame.init()
 pygame.mixer.init()
