@@ -5,6 +5,7 @@ from files.Bomb import Bomb
 from files.Fish import Fish
 from files.Milk import Milk
 from files.Player import Player
+from files.Sparkle import Sparkle
 
 pygame.init()
 pygame.mixer.init()
@@ -56,6 +57,10 @@ def make_explosion(x, y):
   explosion = Explosion(x, y)
   explosion_sprites.add(explosion)
 
+def make_pop(x, y):
+  explosion = Sparkle(x, y)
+  explosion_sprites.add(explosion)
+
 # Create the game loop
 running = True
 while running:
@@ -92,6 +97,7 @@ while running:
   # Check Colisions
   fruit = pygame.sprite.spritecollideany(player, fruit_sprites)
   if fruit:
+    make_pop(fruit.x, fruit.y)
     meow_sound.play()  
     fruit.reset()
 
