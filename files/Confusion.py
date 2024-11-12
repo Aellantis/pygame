@@ -1,4 +1,3 @@
-from typing import Sequence
 from files.Animation import Animation
 
 def get_explosion_frames():

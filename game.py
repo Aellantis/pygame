@@ -1,6 +1,5 @@
 import pygame
 from random import randint, choice
-from files.Animation import Animation
 from files.Confusion import Explosion
 from files.Bomb import Bomb
 from files.Fish import Fish
